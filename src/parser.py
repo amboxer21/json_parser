@@ -1,5 +1,5 @@
 from numbers import Number
-from _main_.tokenizer import Tokenizer
+from tokenizer import Tokenizer
 
 class Parser(Tokenizer):
         

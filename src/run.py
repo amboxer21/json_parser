@@ -1,8 +1,8 @@
 import logging
 import json
 
-from _main_.parser import Parser
-from _main_.parser import Tokenizer 
+from parser import Parser
+from parser import Tokenizer 
 
 if __name__ == "__main__": 
 
