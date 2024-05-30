@@ -3,43 +3,38 @@ from _main_.tokenizer import Tokenizer
 
 class Parser(Tokenizer):
 
-    __number = str()
-    __string = str()
+    __token = {'number': '', 'string': ''}
           
     def __init__(self, string):
         super().__init__(string)
-        a = []
-        self.lookahead = self.getNextToken() 
-        self.string = string
+        #self.getNextToken()
     
     def parse(self):
         return({'type' : 'Program', 'body': self.Literal()})
     
     def Literal(self): 
-        match (self.token_type): 
+        match (self.token['type']): 
             case 'STRING':
-                return self.NumericLiteral() 
-            case 'NUMBER':
                 return self.StringLiteral() 
+            case 'NUMBER':
+                return self.NumericLiteral() 
         raise ValueError('Literal: unexpected literal production')
     
     def StringLiteral(self):
-        token = self.eat('STRING')
-        return({'type': 'StringLiteral'}, {'value': token[1:-1]}) 
+        return({'type': 'StringLiteral'}, {'value': self.eat('STRING')[1:-1]}) 
 
     def NumericLiteral(self):
-        token = self.eat('NUMBER') 
-        return ({'type': 'NumericLiteral'}, {'value' : token})  
+        return ({'type': 'NumericLiteral'}, {'value' : self.eat('NUMBER')})  
     
     def eat(self, tokenType): 
-        token = self.lookahead
+        token = self.getNextToken()
         if token is None:
             raise ValueError('Unexpected End of Input, expected "${tokenType}"') 
         
-        if token.token_type is not tokenType: 
+        if self.token['type'] is not tokenType: 
             raise ValueError('Unexpected token type, expected "${tokenType}"')
         
-        self.lookahead = self.getNextToken()
+        self.getNextToken()
         return token
         
     def Program(self): 

@@ -2,12 +2,13 @@ import logging
 import json
 
 from _main_.parser import Parser
-
+from _main_.tokenizer import Tokenizer
 
 if __name__ == "__main__": 
     
-    program = Parser('139dmasdjf')
+    tok        = Tokenizer('139dmasdjf')
+    tok_parser = Parser('139dmasdjf')
 
-    program.parse()
+    tok_parser.parse()
 
-    print(program.Program())
+    print(tok_parser.Program())
