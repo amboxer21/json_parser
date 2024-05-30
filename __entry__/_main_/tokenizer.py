@@ -32,7 +32,7 @@ class Tokenizer(object):
         
         #String: 
         for s in self.string:
-            if re.search('[0-9]',s):
+            if re.search('[a-zA-Z]',s):
                 string += s
         self.token = {'type' :'STRING', 'value': string}
         return self.token
